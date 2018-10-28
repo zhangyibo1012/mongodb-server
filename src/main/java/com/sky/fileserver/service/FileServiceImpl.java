@@ -34,6 +34,14 @@ public class FileServiceImpl implements FileService {
         fileRepository.deleteById(id);
     }
 
+    /**
+     * 删除存储库管理的所有实体
+     */
+    @Override
+    public void deleteAll() {
+        fileRepository.deleteAll();
+    }
+
     @Override
     public Optional<File> getFileById(String id) {
         return fileRepository.findById(id);

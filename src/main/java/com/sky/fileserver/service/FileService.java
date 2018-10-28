@@ -30,6 +30,11 @@ public interface FileService {
     void removeFile(String id);
 
     /**
+     *  删除存储库管理的所有实体
+     */
+    void deleteAll();
+
+    /**
      * 根据id获取文件
      *
      * @param File

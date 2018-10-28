@@ -173,5 +173,27 @@ public class FileController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+
+
+
+    }
+
+
+    /**
+     * 删除文件
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(value = "deleteAll")
+    @ResponseBody
+    public ResponseEntity<String> deleteAll() {
+
+        try {
+            fileService.deleteAll();
+            return ResponseEntity.status(HttpStatus.OK).body("DELETE Success!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }
