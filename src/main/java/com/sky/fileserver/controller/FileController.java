@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600) // 允许所有域名访问
@@ -82,7 +83,6 @@ public class FileController {
 
     /**
      * 在线显示文件
-     *
      * @param id
      * @return
      */
@@ -104,6 +104,12 @@ public class FileController {
 
     }
 
+//    public static void main(String[] args) {
+//        String  fileName = "jvm.jpg";
+//        String name = fileName.substring(fileName.lastIndexOf("."));
+//        System.out.println(name);
+//    }
+
     /**
      * 上传
      *
@@ -113,9 +119,10 @@ public class FileController {
      */
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-
+        String originalFilename = file.getOriginalFilename();
+        String suffixName = originalFilename.substring(originalFilename.lastIndexOf("."));
         try {
-            File f = new File(file.getOriginalFilename(), file.getContentType(), file.getSize(),
+            File f = new File(UUID.randomUUID() + suffixName, file.getContentType(), file.getSize(),
                     new Binary(file.getBytes()));
 
             f.setMd5(MD5Util.getMD5(file.getInputStream()));
