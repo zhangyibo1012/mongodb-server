@@ -49,8 +49,8 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<File> listFilesByPage(int pageIndex, int pageSize) {
-        Page<File> page = null;
-        List<File> list = null;
+        Page<File> page;
+        List<File> list;
 
         Sort sort = new Sort(Sort.Direction.DESC, "uploadDate");
         Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
