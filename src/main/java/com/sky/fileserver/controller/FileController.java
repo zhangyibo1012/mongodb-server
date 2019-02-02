@@ -104,11 +104,6 @@ public class FileController {
 
     }
 
-//    public static void main(String[] args) {
-//        String  fileName = "jvm.jpg";
-//        String name = fileName.substring(fileName.lastIndexOf("."));
-//        System.out.println(name);
-//    }
 
     /**
      * 上传
@@ -122,9 +117,8 @@ public class FileController {
         String originalFilename = file.getOriginalFilename();
         String suffixName = originalFilename.substring(originalFilename.lastIndexOf("."));
         try {
-            File f = new File(UUID.randomUUID() + suffixName, file.getContentType(), file.getSize(),
+            File f = new File(UUID.randomUUID().toString().replace("-", "") + suffixName, file.getContentType(), file.getSize(),
                     new Binary(file.getBytes()));
-
             f.setMd5(MD5Util.getMD5(file.getInputStream()));
             fileService.saveFile(f);
         } catch (IOException | NoSuchAlgorithmException ex) {
@@ -180,9 +174,6 @@ public class FileController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-
-
-
     }
 
 
@@ -190,7 +181,6 @@ public class FileController {
      * 删除文件
      *
      * @param id
-     * @return
      */
     @DeleteMapping(value = "deleteAll")
     @ResponseBody
